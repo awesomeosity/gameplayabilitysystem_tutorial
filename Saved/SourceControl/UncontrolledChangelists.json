@@ -16,6 +16,10 @@
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Characters/Enemies/ABP_Goblin_Slingshot.uasset",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Inputs/InputAction/IA_Move.uasset",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Inputs/IMC_Default.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Controllers/BP_PlayerController.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/BP_AuraGameMode.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Maps/StartupMap.umap",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Characters/BP_EnemyBase.uasset",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/BP_Goblin_Spear.uasset"
 			]
 		}
