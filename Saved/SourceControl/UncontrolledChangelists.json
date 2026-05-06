@@ -20,6 +20,9 @@
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/BP_AuraGameMode.uasset",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Maps/StartupMap.umap",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Characters/BP_EnemyBase.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Gameplay/BP_AuraGameMode.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Gameplay/BP_AuraPlayerState.uasset",
+				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/Blueprints/Items/BP_HealthPotion.uasset",
 				"C:/Users/Kevin/Unreal/Aura_UE_Version_5_3/Aura/Content/BP_Goblin_Spear.uasset"
 			]
 		}
