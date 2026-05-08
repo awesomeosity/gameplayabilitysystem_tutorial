@@ -1,3 +1,5 @@
-2026/05/06-17:17:32.902 6f24 Reusing MANIFEST C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/MANIFEST-000001
-2026/05/06-17:17:32.909 6f24 Recovering log #23
-2026/05/06-17:17:32.912 6f24 Reusing old log C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/000023.log 
+2026/05/08-12:13:40.502 59b4 Reusing MANIFEST C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/MANIFEST-000001
+2026/05/08-12:13:40.509 59b4 Recovering log #44
+2026/05/08-12:13:40.512 59b4 Reusing old log C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/000044.log 
+2026/05/08-12:15:35.616 6884 Level-0 table #48: started
+2026/05/08-12:15:35.623 6884 Level-0 table #48: 73187 bytes OK

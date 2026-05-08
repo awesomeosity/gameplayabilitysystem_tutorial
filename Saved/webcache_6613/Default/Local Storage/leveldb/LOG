@@ -1,14 +1,8 @@
-2026/05/06-17:19:47.854 7f64 Reusing MANIFEST C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/MANIFEST-000001
-2026/05/06-17:19:47.861 7f64 Recovering log #23
-2026/05/06-17:19:47.862 7f64 Level-0 table #25: started
-2026/05/06-17:19:47.869 7f64 Level-0 table #25: 65426 bytes OK
-2026/05/06-17:19:47.875 7f64 Delete type=0 #23
-2026/05/06-17:19:47.876 4664 Compacting 4@0 + 1@1 files
-2026/05/06-17:19:47.883 4664 Generated table #27@0: 4 keys, 13591 bytes
-2026/05/06-17:19:47.883 4664 Compacted 4@0 + 1@1 files => 13591 bytes
-2026/05/06-17:19:47.886 4664 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/05/06-17:19:47.887 4664 Delete type=2 #14
-2026/05/06-17:19:47.887 4664 Delete type=2 #16
-2026/05/06-17:19:47.887 4664 Delete type=2 #19
-2026/05/06-17:19:47.888 4664 Delete type=2 #22
-2026/05/06-17:19:47.888 4664 Delete type=2 #25
+2026/05/08-12:16:27.575 4924 Reusing MANIFEST C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/MANIFEST-000001
+2026/05/08-12:16:27.584 4924 Recovering log #44
+2026/05/08-12:16:27.585 4924 Level-0 table #47: started
+2026/05/08-12:16:27.594 4924 Level-0 table #47: 73187 bytes OK
+2026/05/08-12:16:27.594 4924 Recovering log #47
+2026/05/08-12:16:27.598 4924 Reusing old log C:\Users\Kevin\Unreal\Aura_UE_Version_5_3\Aura\Saved\webcache_6613\Default\Local Storage\leveldb/000047.log 
+2026/05/08-12:16:27.602 4924 Delete type=0 #44
+2026/05/08-12:16:27.603 4924 Delete type=2 #48

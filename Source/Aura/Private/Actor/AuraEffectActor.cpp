@@ -55,6 +55,7 @@ void AAuraEffectActor::OnOverlap(
 	//TODO: Change this to apply a gameplay effect.
 	UAuraAttributeSet* MutableAuraAttribute = const_cast<UAuraAttributeSet*>(AuraAttributeSet);
 	MutableAuraAttribute->SetHealth(AuraAttributeSet->GetHealth() + 25.f);
+	MutableAuraAttribute->SetMana(AuraAttributeSet->GetMana() - 25.f);
 	Destroy();
 }
 

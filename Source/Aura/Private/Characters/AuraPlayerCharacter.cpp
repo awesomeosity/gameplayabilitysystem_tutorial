@@ -7,6 +7,10 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/AuraPlayerState.h"
+#include "Kismet/GameplayStatics.h"
+#include "Game Mode/AuraGameMode.h"
+#include "UI/AAuraHUD.h"
+#include "Player/AuraPlayerController.h"
 
 AAuraPlayerCharacter::AAuraPlayerCharacter()
 {
@@ -60,4 +64,14 @@ void AAuraPlayerCharacter::SetUpAbilitySystemComp()
 	AttributeSet = AuraPlayerState->GetAttributeSet();
 
 	AbilitySystemComp->InitAbilityActorInfo(AuraPlayerState, this);
+
+	auto* PlayerController = Cast<AAuraPlayerController>(GetController());
+	if (PlayerController == nullptr)
+		return;
+
+	auto* HUD = PlayerController->GetHUD<AAAuraHUD>();
+	if (HUD == nullptr)
+		return;
+
+	HUD->InitOverlay(PlayerController, AuraPlayerState, AbilitySystemComp, AttributeSet);
 }
