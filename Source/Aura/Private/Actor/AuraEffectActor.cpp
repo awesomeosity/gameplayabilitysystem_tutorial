@@ -2,69 +2,59 @@
 
 
 #include "Actor/AuraEffectActor.h"
-#include "Components/StaticMeshComponent.h"
-#include "Components/SphereComponent.h"
-#include "AbilitySystemInterface.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
-#include "AbilitySystem/AuraAttributeSet.h"
+#include "Components/StaticMeshComponent.h"
 
 // Sets default values
 AAuraEffectActor::AAuraEffectActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
-	SetRootComponent(Mesh);
-
-	Hitbox = CreateDefaultSubobject<USphereComponent>("Hitbox");
-	Hitbox->SetupAttachment(Mesh);
-
+	
+	SetRootComponent(CreateDefaultSubobject<USceneComponent>("RootSceneComponent"));
 }
 
 // Called when the game starts or when spawned
 void AAuraEffectActor::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Hitbox->OnComponentBeginOverlap.AddDynamic(this, &AAuraEffectActor::OnOverlap);
-	Hitbox->OnComponentEndOverlap.AddDynamic(this, &AAuraEffectActor::EndOverlap);
 }
 
-void AAuraEffectActor::OnOverlap(
-	UPrimitiveComponent* OverlappedComponent,
-	AActor* OtherActor,
-	UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex,
-	bool bFromSweep,
-	const FHitResult& SweepResult
-)
+void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor)
 {
-	auto* AbilityActor = Cast<IAbilitySystemInterface>(OtherActor);
-	if (AbilityActor == nullptr)
+	auto* TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	if (TargetAbilitySystemComponent == nullptr)
 		return;
-
-	const auto* AbilitySystemComp = AbilityActor->GetAbilitySystemComponent();
-	if (AbilitySystemComp == nullptr)
+	
+	if (AppliedEffectOnOverlap == nullptr)
 		return;
-
-	const auto* AuraAttributeSet = Cast<UAuraAttributeSet>(AbilitySystemComp->GetAttributeSet(UAuraAttributeSet::StaticClass()));
-	if (AuraAttributeSet == nullptr)
-		return;
-
-	//TODO: Change this to apply a gameplay effect.
-	UAuraAttributeSet* MutableAuraAttribute = const_cast<UAuraAttributeSet*>(AuraAttributeSet);
-	MutableAuraAttribute->SetHealth(AuraAttributeSet->GetHealth() + 25.f);
-	MutableAuraAttribute->SetMana(AuraAttributeSet->GetMana() - 25.f);
-	Destroy();
+	
+	auto EffectContextHandle = TargetAbilitySystemComponent->MakeEffectContext();
+	EffectContextHandle.AddSourceObject(this);
+	
+	auto EffectSpec = TargetAbilitySystemComponent->MakeOutgoingSpec(AppliedEffectOnOverlap, Level, EffectContextHandle);
+	auto SavedHandle = TargetAbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*EffectSpec.Data.Get());
+	
+	if (EffectSpec.Data.Get()->Duration == FGameplayEffectConstants::INFINITE_DURATION)
+	{
+		SavedHandles.Add({TargetAbilitySystemComponent, SavedHandle});
+	}
 }
 
-void AAuraEffectActor::EndOverlap(
-	UPrimitiveComponent* OverlappedComponent,
-	AActor* OtherActor,
-	UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex
-)
+void AAuraEffectActor::RemoveEffectFromTarget(AActor* TargetActor, int32 StackCount)
 {
-
+	if (AppliedEffectOnOverlap == nullptr)
+		return;
+	
+	auto* TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	if (TargetAbilitySystemComponent == nullptr)
+		return;
+	
+	const auto& SavedHandle = SavedHandles.FindChecked(TargetAbilitySystemComponent);
+	if (SavedHandle.IsValid() == false)
+		return;
+	
+	TargetAbilitySystemComponent->RemoveActiveGameplayEffect(SavedHandle, StackCount);
 }

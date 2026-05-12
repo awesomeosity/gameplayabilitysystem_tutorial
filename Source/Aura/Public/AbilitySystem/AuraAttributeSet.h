@@ -13,6 +13,24 @@ GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+public:
+	FGameplayEffectContextHandle EffectContext;
+	
+	UAbilitySystemComponent* SourceAbilitySystemComponent;
+	AActor* SourceAvatarActor;
+	AController* SourceController;
+	ACharacter* SourceCharacter;
+	
+	UAbilitySystemComponent* TargetAbilitySystemComponent;
+	AActor* TargetAvatarActor;
+	AController* TargetController;
+	ACharacter* TargetCharacter;
+};
+
 /**
  * 
  */
@@ -23,6 +41,13 @@ class AURA_API UAuraAttributeSet : public UAttributeSet
 public:
 	UAuraAttributeSet();
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	// Called before an attribute change is applied.
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
+	// Called after an effect is executed; used for game-rule-related changes, such as
+	// clamping health to max health, or setting an attribute based on another changed attribute.
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 	// If adding new attributes, also add OnRep functions for each and update the DOREPLIFETIME macros in 
 	// GetLifetimeReplicatedProps.
@@ -42,7 +67,6 @@ public:
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana);
 
-
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth);
 
@@ -54,4 +78,7 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana);
+	
+protected:
+	static FEffectProperties ConstructEffectProperties(const struct FGameplayEffectModCallbackData& Data);
 };
