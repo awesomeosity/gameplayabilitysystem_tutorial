@@ -29,6 +29,8 @@ protected:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	// IAbilitySystemInterface END
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; };
+	
+	virtual void SetUpAbilitySystemComp();
 
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	TObjectPtr<USkeletalMeshComponent> WeaponMesh;

@@ -25,4 +25,6 @@ public:
 	virtual void HighlightActor(bool bShouldHighlight) override;
 	// IHighlightInterface functions end
 
+protected:
+	virtual void SetUpAbilitySystemComp() override;
 };

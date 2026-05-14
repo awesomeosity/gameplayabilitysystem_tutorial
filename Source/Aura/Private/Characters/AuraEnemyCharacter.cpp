@@ -20,7 +20,7 @@ AAuraEnemyCharacter::AAuraEnemyCharacter()
 
 void AAuraEnemyCharacter::BeginPlay()
 {
-	AbilitySystemComp->InitAbilityActorInfo(this, this);
+	Super::BeginPlay();
 }
 
 void AAuraEnemyCharacter::HighlightActor(bool bShouldHighlight)
@@ -38,4 +38,16 @@ void AAuraEnemyCharacter::HighlightActor(bool bShouldHighlight)
 		GetMesh()->SetRenderCustomDepth(false);
 		WeaponMesh->SetRenderCustomDepth(false);
 	}
+}
+
+void AAuraEnemyCharacter::SetUpAbilitySystemComp()
+{
+	Super::SetUpAbilitySystemComp();
+	
+	AbilitySystemComp->InitAbilityActorInfo(this, this);
+	auto* AuraAbilityComp = Cast<UAura_AbilitySystemComponent>(AbilitySystemComp);
+	if (AuraAbilityComp == nullptr)
+		return;
+	
+	AuraAbilityComp->AbilityActorInfoSet();
 }

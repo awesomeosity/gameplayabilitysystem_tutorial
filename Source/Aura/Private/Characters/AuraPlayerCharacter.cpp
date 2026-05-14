@@ -64,6 +64,11 @@ void AAuraPlayerCharacter::SetUpAbilitySystemComp()
 	AttributeSet = AuraPlayerState->GetAttributeSet();
 
 	AbilitySystemComp->InitAbilityActorInfo(AuraPlayerState, this);
+	auto* AuraAbilityComp = Cast<UAura_AbilitySystemComponent>(AbilitySystemComp);
+	if (AuraAbilityComp == nullptr)
+		return;
+	
+	AuraAbilityComp->AbilityActorInfoSet();
 
 	auto* PlayerController = Cast<AAuraPlayerController>(GetController());
 	if (PlayerController == nullptr)

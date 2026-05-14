@@ -27,7 +27,7 @@ public:
 protected:
 	virtual void OnRep_PlayerState() override;
 
-	void SetUpAbilitySystemComp();
+	virtual void SetUpAbilitySystemComp() override;
 
 	UPROPERTY(EditAnywhere, Category = "Components")
 	TObjectPtr<USpringArmComponent> SpringArm;

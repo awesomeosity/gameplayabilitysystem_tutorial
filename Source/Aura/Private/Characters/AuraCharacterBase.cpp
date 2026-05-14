@@ -27,3 +27,7 @@ UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComp;
 }
+
+void AAuraCharacterBase::SetUpAbilitySystemComp()
+{
+}
