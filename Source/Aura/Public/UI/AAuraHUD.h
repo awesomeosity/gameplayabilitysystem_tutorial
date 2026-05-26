@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "AAuraHUD.generated.h"
 
+class UAttributeMenuWidgetController;
 class UAuraUserWidget;
 class UOverlayWidgetController;
 class APlayerController;
@@ -27,7 +28,25 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UAuraUserWidget> Overlay;
 
+	UFUNCTION(BlueprintCallable)
+	UOverlayWidgetController* GetOverlayController(const FWidgetControllerParams& Params);
+
+	UFUNCTION()
+	void InitOverlay(APlayerController* PlayerController, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet);
+	
 	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<UAuraUserWidget> AttributeMenu;
+
+	UFUNCTION(BlueprintCallable)
+	UAttributeMenuWidgetController* GetAttributeMenuController(const FWidgetControllerParams& Params);
+
+	UFUNCTION()
+	void InitAttributeMenu(APlayerController* PlayerController, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet);
+
+protected:
+
+private:
+	UPROPERTY()
 	TObjectPtr<UOverlayWidgetController> OverlayController;
 
 	UPROPERTY(EditAnywhere)
@@ -35,15 +54,13 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UAuraUserWidget> OverlayClass;
+	
+	UPROPERTY()
+	TObjectPtr<UAttributeMenuWidgetController> AttributeMenuController;
 
-	UFUNCTION(BlueprintCallable)
-	UOverlayWidgetController* GetOverlayController(const FWidgetControllerParams& Params);
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UAttributeMenuWidgetController> AttributeMenuControllerClass;
 
-	UFUNCTION()
-	void InitOverlay(APlayerController* PlayerController, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet);
-
-protected:
-
-private:
-
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UAuraUserWidget> AttributeMenuClass;
 };

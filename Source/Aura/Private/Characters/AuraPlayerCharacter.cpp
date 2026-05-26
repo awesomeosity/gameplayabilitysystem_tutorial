@@ -46,6 +46,15 @@ void AAuraPlayerCharacter::PossessedBy(AController* NewController)
 	SetUpAbilitySystemComp();
 }
 
+int32 AAuraPlayerCharacter::GetPlayerLevel() const
+{
+	auto* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	if (AuraPlayerState == nullptr)
+		return 0;
+	
+	return AuraPlayerState->GetPlayerLevel();
+}
+
 void AAuraPlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
@@ -61,7 +70,7 @@ void AAuraPlayerCharacter::SetUpAbilitySystemComp()
 		return;
 
 	AbilitySystemComp = AuraPlayerState->GetAbilitySystemComponent();
-	AttributeSet = AuraPlayerState->GetAttributeSet();
+	PrimaryAttributeSet = AuraPlayerState->GetAttributeSet();
 
 	AbilitySystemComp->InitAbilityActorInfo(AuraPlayerState, this);
 	auto* AuraAbilityComp = Cast<UAura_AbilitySystemComponent>(AbilitySystemComp);
@@ -78,5 +87,6 @@ void AAuraPlayerCharacter::SetUpAbilitySystemComp()
 	if (HUD == nullptr)
 		return;
 
-	HUD->InitOverlay(PlayerController, AuraPlayerState, AbilitySystemComp, AttributeSet);
+	HUD->InitOverlay(PlayerController, AuraPlayerState, AbilitySystemComp, PrimaryAttributeSet);
+	InitializeDefaultAttributes();
 }

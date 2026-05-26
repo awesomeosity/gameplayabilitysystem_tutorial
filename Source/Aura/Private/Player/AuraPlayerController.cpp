@@ -74,7 +74,7 @@ void AAuraPlayerController::CursorTrace()
 	if (CursorHit.bBlockingHit == false)
 		return;
 
-	TScriptInterface<IHighlightInterface> HitActor = CursorHit.GetActor();
+	auto* HitActor = CursorHit.GetActor();
 	if (HitActor == nullptr && HighlightedActor != nullptr)
 	{
 		HighlightedActor->HighlightActor(false);
@@ -85,7 +85,14 @@ void AAuraPlayerController::CursorTrace()
 		if (HighlightedActor != nullptr)
 			HighlightedActor->HighlightActor(false);
 	
-		HighlightedActor = HitActor;
-		HighlightedActor->HighlightActor(true);
+		if (HitActor->Implements<UHighlightInterface>())
+		{
+			HighlightedActor = HitActor;
+			HighlightedActor->HighlightActor(true);
+		}
+		else
+		{
+			HighlightedActor = nullptr;
+		}
 	}
 }

@@ -15,7 +15,7 @@ AAuraEnemyCharacter::AAuraEnemyCharacter()
 	AbilitySystemComp->SetIsReplicated(bIsReplicated);
 	AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("Attribute Set");
+	PrimaryAttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("Attribute Set");
 }
 
 void AAuraEnemyCharacter::BeginPlay()
@@ -38,6 +38,11 @@ void AAuraEnemyCharacter::HighlightActor(bool bShouldHighlight)
 		GetMesh()->SetRenderCustomDepth(false);
 		WeaponMesh->SetRenderCustomDepth(false);
 	}
+}
+
+int32 AAuraEnemyCharacter::GetPlayerLevel() const
+{
+	return Level;
 }
 
 void AAuraEnemyCharacter::SetUpAbilitySystemComp()

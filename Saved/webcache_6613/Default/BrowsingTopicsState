@@ -13,7 +13,21 @@
       "padded_top_topics_start_index": 0,
       "taxonomy_version": 0,
       "top_topics_and_observing_domains": [  ]
+   }, {
+      "calculation_time": "13423687789143900",
+      "config_version": 0,
+      "model_version": "0",
+      "padded_top_topics_start_index": 0,
+      "taxonomy_version": 0,
+      "top_topics_and_observing_domains": [  ]
+   }, {
+      "calculation_time": "13424293866791610",
+      "config_version": 0,
+      "model_version": "0",
+      "padded_top_topics_start_index": 0,
+      "taxonomy_version": 0,
+      "top_topics_and_observing_domains": [  ]
    } ],
    "hex_encoded_hmac_key": "DF1176FC71FAD8A2965AA61591E4CDB83FC41B5BD80D10808E5E97944ACFCF0E",
-   "next_scheduled_calculation_time": "13423687227211961"
+   "next_scheduled_calculation_time": "13424898666793138"
 }

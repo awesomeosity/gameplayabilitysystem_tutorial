@@ -23,6 +23,10 @@ public:
 	virtual void BeginPlay() override;
 	
 	virtual void PossessedBy(AController* NewController) override;
+	
+	// ICombatInterface functions
+	virtual int32 GetPlayerLevel() const override;
+	// ICombatInterface END
 
 protected:
 	virtual void OnRep_PlayerState() override;

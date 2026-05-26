@@ -24,7 +24,14 @@ public:
 	// IHighlightInterface functions
 	virtual void HighlightActor(bool bShouldHighlight) override;
 	// IHighlightInterface functions end
+	
+	// ICombatInterface functions
+	virtual int32 GetPlayerLevel() const override;
+	// ICombatInterface END
 
 protected:
 	virtual void SetUpAbilitySystemComp() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 Level = 1;
 };

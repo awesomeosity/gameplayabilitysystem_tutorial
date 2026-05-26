@@ -2,12 +2,14 @@
 
 
 #include "Characters/AuraCharacterBase.h"
+
+#include "AbilitySystemComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 AAuraCharacterBase::AAuraCharacterBase()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 
@@ -28,6 +30,32 @@ UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComp;
 }
 
+int32 AAuraCharacterBase::GetPlayerLevel() const
+{
+	return ICombatInterface::GetPlayerLevel();
+}
+
 void AAuraCharacterBase::SetUpAbilitySystemComp()
 {
+}
+
+void AAuraCharacterBase::ApplyEffectToSelf(const TSubclassOf<UGameplayEffect> EffectToApply, const float Level /*= 1.f*/) const
+{
+	if (EffectToApply == nullptr)
+		return;
+	
+	if (AbilitySystemComp == nullptr)
+		return;
+	
+	auto EffectContext = AbilitySystemComp->MakeEffectContext();
+	EffectContext.AddSourceObject(this);
+	const auto InitialGameplayEffectSpec = AbilitySystemComp->MakeOutgoingSpec(EffectToApply, Level, EffectContext);
+	AbilitySystemComp->ApplyGameplayEffectSpecToSelf(*InitialGameplayEffectSpec.Data.Get());
+}
+
+void AAuraCharacterBase::InitializeDefaultAttributes() const
+{
+	ApplyEffectToSelf(DefaultPrimaryAttributes);
+	ApplyEffectToSelf(DefaultSecondaryAttributes);
+	ApplyEffectToSelf(InitialVitalAttributes);
 }
